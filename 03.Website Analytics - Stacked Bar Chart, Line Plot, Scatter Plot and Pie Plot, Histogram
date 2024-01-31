@@ -1,0 +1,45 @@
+# Install and load required packages
+install.packages("ggplot2")
+install.packages("dplyr")
+library(ggplot2)
+library(dplyr)
+
+# Create a data frame with the given data
+data <- data.frame(
+  Date = as.Date(c("2023-01-01", "2023-01-02", "2023-01-03", "2023-01-04", "2023-01-05")),
+  Page_Views = c(1500, 1600, 1400, 1650, 1800),
+  Click_Through_Rate = c(2.3, 2.7, 2.0, 2.4, 2.6)
+)
+print(data)
+# Stacked Bar Chart
+bar_chart <- ggplot(data, aes(x = Date, y = Page_Views, fill = factor(Click_Through_Rate))) +
+  geom_bar(stat = "identity") +
+  labs(title = "Stacked Bar Chart", x = "Date", y = "Page Views")
+
+# Line Plot
+line_plot <- ggplot(data, aes(x = Date, y = Click_Through_Rate)) +
+  geom_line() +
+  labs(title = "Line Plot", x = "Date", y = "Click-through Rate")
+
+# Scatter Plot
+scatter_plot <- ggplot(data, aes(x = Page_Views, y = Click_Through_Rate)) +
+  geom_point() +
+  labs(title = "Scatter Plot", x = "Page Views", y = "Click-through Rate")
+
+# Pie Plot
+pie_chart <- ggplot(data, aes(x = "", y = Page_Views, fill = factor(Click_Through_Rate))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  labs(title = "Pie Plot", x = NULL, y = NULL)
+
+# Histogram
+histogram <- ggplot(data, aes(x = Page_Views)) +
+  geom_histogram(binwidth = 100, fill = "blue", color = "black", aes(y = ..count..)) +
+  labs(title = "Histogram", x = "Page Views", y = "Frequency")
+
+# Display the plots
+print(bar_chart)
+print(line_plot)
+print(scatter_plot)
+print(pie_chart)
+print(histogram)
